@@ -1,0 +1,19 @@
+{
+  "name": "ts-discord-bot",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "debug": "nodemon --exec ts-node -- ./src/index.ts"
+  },
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "discord.js": "^12.0.2",
+    "ts-node": "^8.9.1",
+    "typescript": "^3.8.3"
+  },
+  "devDependencies": {
+    "@types/node": "^12.12.31"
+  }
+}
