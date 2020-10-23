@@ -63,12 +63,16 @@ export class Bot {
     public static send(target: Discord.User | Discord.TextChannel, message: Discord.Message | Discord.MessageEmbed) {
         if (this.getInstance().ready) {
             try {
-                target.send(message);
+                (target as Discord.TextChannel).send(message as Discord.MessageEmbed);
             } catch (err) {
                 Log.error(err, "Bot.Send");
             }
         } else {
             Log.error("Bot not ready", "Bot.Send");
         }
+    }
+
+    public static getBot() {
+        return Bot.getInstance().bot;
     }
 }

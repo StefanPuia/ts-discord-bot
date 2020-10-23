@@ -1,6 +1,7 @@
 import * as Discord from 'discord.js';
 
 import { Bot } from './bot';
+import { Config } from './config';
 import { Command, CommandHandler } from './handler';
 import { Log } from './log';
 
@@ -33,7 +34,9 @@ export class Controller {
     }
 
     private static parseMessage(text: string): MessageCommand | undefined {
-        const match = text.match(/^([\w\d-]+)(\s+(?:(?:"(?:(?:[\w\d\s])|(?:\\"))+?")|[^-\s].+?))?((?:\s+-(?:\w+)\s+(?:(?:".+?")|[\w\d]+)?)*)$/);
+        const prefix = (Config.get("prefix") || "").replace(/(.)/g, '\\$1');
+        const pattern = new RegExp(`^${prefix}([\\w\\d-]+)(\\s+(?:(?:"(?:(?:[\\w\\d\\s])|(?:\\\\"))+?")|[^-\\s].+?))?((?:\\s+-(?:\\w+)\\s+(?:(?:".+?")|[\\w\\d]+)?)*)$`);
+        const match = text.match(pattern);
         if (!match) return undefined;
         return {
             name: (match[1] || "").trim(),
